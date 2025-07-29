@@ -131,51 +131,75 @@ const ProductCatalog = ({ products = [] }: ProductCatalogProps) => {
   });
 
   return (
-    <div className="w-full dark:bg-gray-900 bg-gray-50 p-4 md:p-6 transition-colors duration-300">
+    <div
+      className="w-full transition-colors duration-300 p-4 md:p-6
+                    dark:bg-transparent bg-transparent"
+    >
       <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-4 dark:text-white text-gray-800">
+        <h2
+          className="text-2xl md:text-3xl font-bold mb-6 text-center
+                       bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"
+        >
           Product Catalog
         </h2>
 
         {/* Search and Filter Bar */}
-        <div className="flex flex-col md:flex-row gap-4 mb-6">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6">
           <div className="relative flex-grow">
             <Search
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
               size={18}
             />
             <Input
               placeholder="Search products..."
-              className="pl-10"
+              className="pl-10 h-12 backdrop-blur-lg border transition-all duration-300
+                        dark:bg-gray-800/50 dark:border-gray-700/50 dark:text-white dark:placeholder-gray-400
+                        bg-white/50 border-gray-300/50 text-gray-900 placeholder-gray-500
+                        focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
           <Button
             variant="outline"
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 h-12 px-6 backdrop-blur-lg border transition-all duration-300 hover:scale-105
+                       dark:bg-gray-800/50 dark:border-gray-700/50 dark:text-white dark:hover:bg-gray-700/50
+                       bg-white/50 border-gray-300/50 text-gray-900 hover:bg-white/70"
             onClick={() => setShowFilters(!showFilters)}
           >
             <SlidersHorizontal size={18} />
-            Filters
+            <span className="hidden sm:inline">Filters</span>
           </Button>
         </div>
 
         {/* Filter Options */}
         {showFilters && (
-          <div className="dark:bg-gray-800 bg-white p-4 rounded-md mb-6 grid grid-cols-1 md:grid-cols-3 gap-4 border dark:border-gray-700 border-gray-200">
+          <div
+            className="backdrop-blur-lg border rounded-2xl p-4 sm:p-6 mb-6 transition-all duration-300
+                          dark:bg-gray-800/40 dark:border-gray-700/50
+                          bg-white/40 border-gray-300/50
+                          grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"
+          >
             <div>
-              <label className="block text-sm font-medium mb-2 dark:text-white text-gray-800">
+              <label className="block text-sm font-semibold mb-3 dark:text-white text-gray-800">
                 Category
               </label>
               <Select
                 value={selectedCategory}
                 onValueChange={setSelectedCategory}
               >
-                <SelectTrigger>
+                <SelectTrigger
+                  className="h-12 backdrop-blur-lg border transition-all duration-300
+                                         dark:bg-gray-800/50 dark:border-gray-700/50 dark:text-white
+                                         bg-white/50 border-gray-300/50 text-gray-900"
+                >
                   <SelectValue placeholder="All Categories" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent
+                  className="backdrop-blur-xl
+                                         dark:bg-gray-800/95 dark:border-gray-700
+                                         bg-white/95 border-gray-200"
+                >
                   <SelectItem value="">All Categories</SelectItem>
                   <SelectItem value="food">Food & Treats</SelectItem>
                   <SelectItem value="toys">Toys & Enrichment</SelectItem>
@@ -187,7 +211,7 @@ const ProductCatalog = ({ products = [] }: ProductCatalogProps) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 dark:text-white text-gray-800">
+              <label className="block text-sm font-semibold mb-3 dark:text-white text-gray-800">
                 Price Range: ${priceRange[0]} - ${priceRange[1]}
               </label>
               <Slider
@@ -203,7 +227,9 @@ const ProductCatalog = ({ products = [] }: ProductCatalogProps) => {
             <div className="flex items-end">
               <Button
                 variant="outline"
-                className="w-full"
+                className="w-full h-12 backdrop-blur-lg border transition-all duration-300 hover:scale-105
+                           dark:bg-gray-800/50 dark:border-gray-700/50 dark:text-white dark:hover:bg-gray-700/50
+                           bg-white/50 border-gray-300/50 text-gray-900 hover:bg-white/70"
                 onClick={() => {
                   setSelectedCategory("");
                   setPriceRange([0, 100]);
@@ -217,22 +243,57 @@ const ProductCatalog = ({ products = [] }: ProductCatalogProps) => {
 
         {/* Pet Type Tabs */}
         <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="w-full overflow-x-auto flex justify-start md:justify-center mb-6">
-            <TabsTrigger value="all">All Pets</TabsTrigger>
-            <TabsTrigger value="dog">Dogs</TabsTrigger>
-            <TabsTrigger value="cat">Cats</TabsTrigger>
-            <TabsTrigger value="small_pet">Small Pets</TabsTrigger>
-            <TabsTrigger value="bird">Birds</TabsTrigger>
-            <TabsTrigger value="fish">Fish</TabsTrigger>
+          <TabsList
+            className="w-full overflow-x-auto flex justify-start md:justify-center mb-6 p-1
+                               backdrop-blur-lg border
+                               dark:bg-gray-800/40 dark:border-gray-700/50
+                               bg-white/40 border-gray-300/50"
+          >
+            <TabsTrigger
+              value="all"
+              className="transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-500 data-[state=active]:text-white"
+            >
+              All Pets
+            </TabsTrigger>
+            <TabsTrigger
+              value="dog"
+              className="transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-500 data-[state=active]:text-white"
+            >
+              Dogs
+            </TabsTrigger>
+            <TabsTrigger
+              value="cat"
+              className="transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-500 data-[state=active]:text-white"
+            >
+              Cats
+            </TabsTrigger>
+            <TabsTrigger
+              value="small_pet"
+              className="transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-500 data-[state=active]:text-white"
+            >
+              Small Pets
+            </TabsTrigger>
+            <TabsTrigger
+              value="bird"
+              className="transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-500 data-[state=active]:text-white"
+            >
+              Birds
+            </TabsTrigger>
+            <TabsTrigger
+              value="fish"
+              className="transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-500 data-[state=active]:text-white"
+            >
+              Fish
+            </TabsTrigger>
           </TabsList>
 
           {/* Results Count */}
-          <div className="mb-4 flex justify-between items-center">
-            <p className="text-sm dark:text-gray-300 text-gray-600">
+          <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+            <p className="text-sm font-medium dark:text-gray-300 text-gray-600">
               {filteredProducts.length} products found
             </p>
             {selectedCategory && (
-              <Badge variant="outline" className="flex items-center gap-1">
+              <Badge className="bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 px-3 py-1">
                 {selectedCategory.charAt(0).toUpperCase() +
                   selectedCategory.slice(1)}
               </Badge>
@@ -240,7 +301,7 @@ const ProductCatalog = ({ products = [] }: ProductCatalogProps) => {
           </div>
 
           {/* Product Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {filteredProducts.length > 0 ? (
               filteredProducts.map((product) => (
                 <ProductCard
@@ -250,13 +311,17 @@ const ProductCatalog = ({ products = [] }: ProductCatalogProps) => {
                   price={product.price}
                   image={product.image}
                   rating={product.rating}
-                  inStock={product.inStock}
+                  category={product.category}
                 />
               ))
             ) : (
-              <div className="col-span-full text-center py-12">
-                <p className="dark:text-gray-300 text-gray-600">
-                  No products found. Try adjusting your filters.
+              <div className="col-span-full text-center py-16">
+                <div className="text-6xl mb-4">🔍</div>
+                <p className="text-lg font-medium dark:text-gray-300 text-gray-600 mb-2">
+                  No products found
+                </p>
+                <p className="text-sm dark:text-gray-400 text-gray-500">
+                  Try adjusting your filters or search terms.
                 </p>
               </div>
             )}

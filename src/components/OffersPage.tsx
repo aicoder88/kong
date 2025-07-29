@@ -92,30 +92,34 @@ const OffersPage = () => {
 
       {/* Header */}
       <motion.header
-        className="sticky top-0 z-50 glass-nav shadow-lg"
+        className="sticky top-0 z-50 backdrop-blur-2xl shadow-2xl border-b transition-all duration-300
+                   dark:bg-gray-900/90 dark:border-gray-700/50
+                   bg-white/90 border-gray-200/50"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <div className="container mx-auto px-6 py-4">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10" />
+        <div className="container mx-auto px-4 sm:px-6 py-4 relative">
           <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3 sm:space-x-4 flex-1 min-w-0">
               <Link to="/">
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="glass hover:bg-white/30"
+                  className="glass-header hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300
+                           dark:text-white text-gray-800 border border-white/20 dark:border-gray-700/50 shrink-0"
                 >
                   <ArrowLeft className="h-5 w-5" />
                 </Button>
               </Link>
-              <div className="flex items-center space-x-3">
-                <div className="text-3xl">🎁</div>
-                <div>
-                  <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <div className="flex items-center space-x-2 sm:space-x-3 min-w-0">
+                <div className="text-2xl sm:text-3xl shrink-0">🎁</div>
+                <div className="min-w-0">
+                  <h1 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent truncate">
                     Offres Spéciales
                   </h1>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-xs sm:text-sm dark:text-gray-300 text-gray-600 truncate">
                     Économisez sur vos produits favoris
                   </p>
                 </div>

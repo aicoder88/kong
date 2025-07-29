@@ -40,7 +40,9 @@ const BottomNavigation = ({ className = "" }: BottomNavigationProps) => {
 
   return (
     <nav
-      className={`fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg ${className}`}
+      className={`fixed bottom-0 left-0 right-0 backdrop-blur-xl shadow-2xl border-t transition-all duration-300 z-50
+                  dark:bg-gray-900/95 dark:border-gray-700/50
+                  bg-white/95 border-gray-200/50 ${className}`}
     >
       <div className="flex justify-around items-center h-16 px-2 max-w-screen-lg mx-auto">
         {navItems.map((item) => {
@@ -49,14 +51,27 @@ const BottomNavigation = ({ className = "" }: BottomNavigationProps) => {
             <Link
               key={item.path}
               to={item.path}
-              className={`flex flex-col items-center justify-center w-full h-full ${isActive ? "text-primary" : "text-gray-500"}`}
+              className={`flex flex-col items-center justify-center w-full h-full relative transition-all duration-300 rounded-lg mx-1
+                         hover:scale-105 hover:bg-white/10 dark:hover:bg-white/5
+                         ${
+                           isActive
+                             ? "text-blue-600 dark:text-blue-400 bg-blue-50/50 dark:bg-blue-900/30"
+                             : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+                         }`}
             >
-              <div className={`${isActive ? "text-primary" : "text-gray-500"}`}>
+              <div
+                className={`transition-all duration-300 ${isActive ? "scale-110" : ""}`}
+              >
                 {item.icon}
               </div>
-              <span className="text-xs mt-1">{item.label}</span>
+              <span
+                className={`text-xs mt-1 font-medium transition-all duration-300
+                              ${isActive ? "text-blue-600 dark:text-blue-400" : ""}`}
+              >
+                {item.label}
+              </span>
               {isActive && (
-                <div className="absolute bottom-0 w-6 h-1 bg-primary rounded-t-md" />
+                <div className="absolute bottom-0 w-8 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-t-md shadow-lg" />
               )}
             </Link>
           );
