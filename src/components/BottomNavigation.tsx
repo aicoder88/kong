@@ -9,30 +9,63 @@ interface BottomNavigationProps {
 const BottomNavigation = ({ className = "" }: BottomNavigationProps) => {
   const location = useLocation();
   const pathname = location.pathname;
+  const [language, setLanguage] = React.useState("en");
+
+  React.useEffect(() => {
+    // Get language from localStorage or detect from URL/context
+    const savedLanguage = localStorage.getItem("language") || "en";
+    setLanguage(savedLanguage);
+  }, []);
+
+  const translations = {
+    en: {
+      home: "Home",
+      products: "Products",
+      store: "Store",
+      offers: "Offers",
+      account: "Account",
+    },
+    fr: {
+      home: "Accueil",
+      products: "Produits",
+      store: "Boutique",
+      offers: "Offres",
+      account: "Compte",
+    },
+    zh: {
+      home: "首页",
+      products: "产品",
+      store: "商店",
+      offers: "优惠",
+      account: "账户",
+    },
+  };
+
+  const t = translations[language as keyof typeof translations];
 
   const navItems = [
     {
-      label: "Home",
+      label: t.home,
       icon: <Home size={20} />,
       path: "/",
     },
     {
-      label: "Products",
+      label: t.products,
       icon: <ShoppingBag size={20} />,
       path: "/products",
     },
     {
-      label: "Store",
+      label: t.store,
       icon: <MapPin size={20} />,
       path: "/store",
     },
     {
-      label: "Offers",
+      label: t.offers,
       icon: <Tag size={20} />,
       path: "/offers",
     },
     {
-      label: "Account",
+      label: t.account,
       icon: <User size={20} />,
       path: "/account",
     },

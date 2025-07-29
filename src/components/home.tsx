@@ -101,6 +101,36 @@ const Home = () => {
       callUs: "📞 Appelez-Nous",
       directions: "🗺️ Directions",
     },
+    zh: {
+      title: "Kong宠物店",
+      subtitle: "蒙特利尔本地宠物用品精品店",
+      heroTitle: "欢迎来到Kong宠物店",
+      heroSubtitle: "& 皇家猫舍研究所",
+      heroDescription:
+        "优质产品，公道价格——为您在蒙特利尔的所有宠物伙伴服务。探索我们来自皇家猫舍研究所的美丽布偶猫。",
+      shopNow: "🛒 立即购买",
+      specialOffer: "蒙特利尔特别优惠",
+      offerText: "首次购买满$10立减$2",
+      offerNote: "(仅限一次使用，仅限店内)",
+      whatWeOffer: "🛒 我们的产品",
+      whatWeOfferDesc:
+        "为您在蒙特利尔的毛茸茸、有羽毛和四条腿的伙伴提供一切所需",
+      visitUs: "📍 拜访我们",
+      address: "📌 地址：",
+      addressText: "5555 Boulevard Décarie, Montreal, QC H3W 3C7",
+      hours: "🕒 营业时间：",
+      hoursText: "我们正在营业——欢迎访客！",
+      contact: "📞 联系方式：",
+      contactText: "今天就致电或到店拜访我们",
+      whyLoveUs: "🐶 宠物家长为什么喜爱我们",
+      featuredProducts: "✨ 精选产品",
+      featuredDesc: "发现我们最受欢迎的商品",
+      comeVisit: "来打个招呼",
+      comeVisitDesc:
+        "无论您是在储备必需品还是想用特别的东西宠爱您的最好朋友，我们都在这里为您服务。",
+      callUs: "📞 致电我们",
+      directions: "🗺️ 路线指引",
+    },
   };
 
   const t = translations[language as keyof typeof translations];
@@ -261,6 +291,12 @@ const Home = () => {
                     className="dark:text-white text-gray-800 dark:hover:bg-gray-700/50 hover:bg-gray-100/50"
                   >
                     FR
+                  </SelectItem>
+                  <SelectItem
+                    value="zh"
+                    className="dark:text-white text-gray-800 dark:hover:bg-gray-700/50 hover:bg-gray-100/50"
+                  >
+                    中文
                   </SelectItem>
                 </SelectContent>
               </Select>

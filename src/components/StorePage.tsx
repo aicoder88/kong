@@ -8,14 +8,51 @@ import {
   Mail,
   Car,
   Heart,
+  Globe,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 import BottomNavigation from "./BottomNavigation";
 
 const StorePage = () => {
+  const [language, setLanguage] = React.useState("en");
+  const [isDarkMode, setIsDarkMode] = React.useState(true);
+
+  React.useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDarkMode]);
+
+  const translations = {
+    en: {
+      title: "Our Store",
+      subtitle: "Visit us on Décarie in Montreal",
+    },
+    fr: {
+      title: "Notre Boutique",
+      subtitle: "Visitez-nous sur Décarie à Montréal",
+    },
+    zh: {
+      title: "我们的商店",
+      subtitle: "欢迎到蒙特利尔Décarie大道拜访我们",
+    },
+  };
+
+  const t = translations[language as keyof typeof translations];
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
       {/* Background Elements */}
@@ -50,13 +87,65 @@ const StorePage = () => {
                 <div className="text-2xl sm:text-3xl shrink-0">🏪</div>
                 <div className="min-w-0">
                   <h1 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent truncate">
-                    Notre Boutique
+                    {t.title}
                   </h1>
                   <p className="text-xs sm:text-sm dark:text-gray-300 text-gray-600 truncate">
-                    Visitez-nous sur Décarie à Montréal
+                    {t.subtitle}
                   </p>
                 </div>
               </div>
+            </div>
+            <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsDarkMode(!isDarkMode)}
+                  className="glass-header hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300
+                           dark:text-white text-gray-800 border border-white/20 dark:border-gray-700/50"
+                >
+                  {isDarkMode ? (
+                    <Sun className="h-5 w-5" />
+                  ) : (
+                    <Moon className="h-5 w-5" />
+                  )}
+                </Button>
+              </motion.div>
+              <Select value={language} onValueChange={setLanguage}>
+                <SelectTrigger
+                  className="w-20 sm:w-24 glass-header border border-white/20 dark:border-gray-700/50
+                                        dark:bg-gray-800/50 bg-white/50 dark:text-white text-gray-800"
+                >
+                  <Globe className="h-4 w-4 mr-1" />
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent
+                  className="glass-header dark:bg-gray-800/95 bg-white/95 backdrop-blur-xl
+                                        dark:border-gray-700 border-gray-200"
+                >
+                  <SelectItem
+                    value="en"
+                    className="dark:text-white text-gray-800 dark:hover:bg-gray-700/50 hover:bg-gray-100/50"
+                  >
+                    EN
+                  </SelectItem>
+                  <SelectItem
+                    value="fr"
+                    className="dark:text-white text-gray-800 dark:hover:bg-gray-700/50 hover:bg-gray-100/50"
+                  >
+                    FR
+                  </SelectItem>
+                  <SelectItem
+                    value="zh"
+                    className="dark:text-white text-gray-800 dark:hover:bg-gray-700/50 hover:bg-gray-100/50"
+                  >
+                    中文
+                  </SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>
